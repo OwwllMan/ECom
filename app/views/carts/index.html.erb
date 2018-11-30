@@ -1,0 +1,12 @@
+<% total = 0 %>
+
+<% @cart.each do |cart| %>
+ <%= Item.find(Cart.find(cart.id).item_id).title %>
+ <br>
+ <%= Item.find(Cart.find(cart.id).item_id).price %>
+ <% total += Item.find(Cart.find(cart.id).item_id).price %>
+ <br>
+ <br>
+<% end %>
+
+<%= total %>
