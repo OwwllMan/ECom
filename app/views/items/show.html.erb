@@ -23,7 +23,7 @@
                             <%= @item.description %>
                             <% if current_user %>
                             <div>
-                            <%= button_to carts_url, :item_id => @item.id %>
+                              <%= button_to "Add to my cart !", {:item_id => @item.id } , :method=>:post %>
                             </div>
                             <% end %>
                         </p>
