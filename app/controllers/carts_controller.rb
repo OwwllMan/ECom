@@ -2,7 +2,7 @@ class CartsController < ApplicationController
 
 	def index
 		puts "prout"
-		puts 
+		puts
 		if current_user
 		@cart = Cart.all.where(user_id: current_user.id)
 		else
@@ -13,7 +13,9 @@ class CartsController < ApplicationController
 	end
 
 	def create
-		
+		puts "JE PRINT PARAMS"
+		print params
+		Cart.create!(user_id: current_user.id, item_id: params[:item_id])
 	end
 
 	def edit

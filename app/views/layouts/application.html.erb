@@ -40,7 +40,7 @@
             <% if user_signed_in? %>
             <li class="nav-item">
                <%= link_to('Logout', destroy_user_session_path, method: :delete, class:"nav-link") %>
-            </li>   
+            </li>
             <%else%>
              <li class="nav-item">
               <a class="nav-link" href="/users/sign_up">Signup</a>
@@ -52,8 +52,8 @@
             <% if current_user %>
             <li class="nav-item">
               <a class="nav-link" href="/carts">Cart</a>
-            </li> 
-            <% end %> 
+            </li>
+            <% end %>
           </ul>
         </div>
       </div>
@@ -63,7 +63,7 @@
 
 <footer style="margin-left: -20px;" class="py-5 bg-dark">
     <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+        <p class="m-0 text-center text-white">Adopt A Kitten</p>
     </div>
 </footer>
 

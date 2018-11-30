@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  post '/items/:id', to: "carts#create"
   resources :items
   devise_for :users
   resources :carts
