@@ -43461,3 +43461,305 @@ ActionView::Template::Error (undefined method `merge' for #<String:0x00007fe7740
 app/views/items/show.html.erb:28:in `block in _app_views_items_show_html_erb__2485235563854552487_70316298045400'
 app/views/items/show.html.erb:26:in `_app_views_items_show_html_erb__2485235563854552487_70316298045400'
 Started POST "/__web_console/repl_sessions/7950ad2b36d0f29ca84fd8c3fff2c352/trace" for 127.0.0.1 at 2018-11-30 02:38:28 +0100
+  [1m[35m (16.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (23.9ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rails:9
+  [1m[35m (505.7ms)[0m  [1m[35mDROP DATABASE IF EXISTS "ECom_development"[0m
+  ↳ bin/rails:9
+  [1m[35m (314.8ms)[0m  [1m[35mDROP DATABASE IF EXISTS "ECom_test"[0m
+  ↳ bin/rails:9
+  [1m[35m (2060.0ms)[0m  [1m[35mCREATE DATABASE "ECom_development" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (905.2ms)[0m  [1m[35mCREATE DATABASE "ECom_test" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35mSQL (0.6ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  ↳ db/schema.rb:16
+  [1m[35m (11.9ms)[0m  [1m[35mDROP TABLE IF EXISTS "carts" CASCADE[0m
+  ↳ db/schema.rb:18
+  [1m[35m (63.8ms)[0m  [1m[35mCREATE TABLE "carts" ("id" bigserial primary key, "user_id" bigint, "item_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:18
+  [1m[35m (68.4ms)[0m  [1m[35mCREATE  INDEX  "index_carts_on_item_id" ON "carts"  ("item_id")[0m
+  ↳ db/schema.rb:18
+  [1m[35m (59.6ms)[0m  [1m[35mCREATE  INDEX  "index_carts_on_user_id" ON "carts"  ("user_id")[0m
+  ↳ db/schema.rb:18
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "categories" CASCADE[0m
+  ↳ db/schema.rb:27
+  [1m[35m (97.8ms)[0m  [1m[35mCREATE TABLE "categories" ("id" bigserial primary key, "title" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:27
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "items" CASCADE[0m
+  ↳ db/schema.rb:33
+  [1m[35m (118.4ms)[0m  [1m[35mCREATE TABLE "items" ("id" bigserial primary key, "title" character varying, "description" text, "price" integer, "image" character varying, "category_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:33
+  [1m[35m (49.7ms)[0m  [1m[35mCREATE  INDEX  "index_items_on_category_id" ON "items"  ("category_id")[0m
+  ↳ db/schema.rb:33
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  ↳ db/schema.rb:44
+  [1m[35m (93.8ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "lastname" character varying DEFAULT '' NOT NULL, "firstname" character varying DEFAULT '' NOT NULL, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:44
+  [1m[35m (49.0ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  ↳ db/schema.rb:44
+  [1m[35m (49.1ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  ↳ db/schema.rb:44
+  [1m[35m (8.8ms)[0m  [1m[35mALTER TABLE "carts" ADD CONSTRAINT "fk_rails_201d6b691f"
+FOREIGN KEY ("item_id")
+  REFERENCES "items" ("id")
+[0m
+  ↳ db/schema.rb:58
+  [1m[35m (9.5ms)[0m  [1m[35mALTER TABLE "carts" ADD CONSTRAINT "fk_rails_ea59a35211"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  ↳ db/schema.rb:59
+  [1m[35m (108.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ db/schema.rb:13
+  [1m[35m (2.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ db/schema.rb:13
+  [1m[35m (4.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20181129234630)[0m
+  ↳ db/schema.rb:13
+  [1m[35m (10.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20181127095338),
+(20181127152050),
+(20181127122353);
+
+[0m
+  ↳ db/schema.rb:13
+  [1m[35m (97.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (1.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ db/schema.rb:13
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Create (1.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-11-30 02:01:07.932884"], ["updated_at", "2018-11-30 02:01:07.932884"]]
+  ↳ db/schema.rb:13
+  [1m[35m (8.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35mSQL (0.6ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  ↳ db/schema.rb:16
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "carts" CASCADE[0m
+  ↳ db/schema.rb:18
+  [1m[35m (76.5ms)[0m  [1m[35mCREATE TABLE "carts" ("id" bigserial primary key, "user_id" bigint, "item_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:18
+  [1m[35m (56.7ms)[0m  [1m[35mCREATE  INDEX  "index_carts_on_item_id" ON "carts"  ("item_id")[0m
+  ↳ db/schema.rb:18
+  [1m[35m (37.7ms)[0m  [1m[35mCREATE  INDEX  "index_carts_on_user_id" ON "carts"  ("user_id")[0m
+  ↳ db/schema.rb:18
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "categories" CASCADE[0m
+  ↳ db/schema.rb:27
+  [1m[35m (108.1ms)[0m  [1m[35mCREATE TABLE "categories" ("id" bigserial primary key, "title" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:27
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "items" CASCADE[0m
+  ↳ db/schema.rb:33
+  [1m[35m (105.4ms)[0m  [1m[35mCREATE TABLE "items" ("id" bigserial primary key, "title" character varying, "description" text, "price" integer, "image" character varying, "category_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:33
+  [1m[35m (49.9ms)[0m  [1m[35mCREATE  INDEX  "index_items_on_category_id" ON "items"  ("category_id")[0m
+  ↳ db/schema.rb:33
+  [1m[35m (1.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  ↳ db/schema.rb:44
+  [1m[35m (82.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "lastname" character varying DEFAULT '' NOT NULL, "firstname" character varying DEFAULT '' NOT NULL, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:44
+  [1m[35m (71.3ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  ↳ db/schema.rb:44
+  [1m[35m (48.5ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  ↳ db/schema.rb:44
+  [1m[35m (8.9ms)[0m  [1m[35mALTER TABLE "carts" ADD CONSTRAINT "fk_rails_201d6b691f"
+FOREIGN KEY ("item_id")
+  REFERENCES "items" ("id")
+[0m
+  ↳ db/schema.rb:58
+  [1m[35m (9.6ms)[0m  [1m[35mALTER TABLE "carts" ADD CONSTRAINT "fk_rails_ea59a35211"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  ↳ db/schema.rb:59
+  [1m[35m (108.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ db/schema.rb:13
+  [1m[35m (2.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ db/schema.rb:13
+  [1m[35m (5.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20181129234630)[0m
+  ↳ db/schema.rb:13
+  [1m[35m (10.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20181127095338),
+(20181127152050),
+(20181127122353);
+
+[0m
+  ↳ db/schema.rb:13
+  [1m[35m (85.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ db/schema.rb:13
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Create (1.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-11-30 02:01:08.991747"], ["updated_at", "2018-11-30 02:01:08.991747"]]
+  ↳ db/schema.rb:13
+  [1m[35m (9.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Update (1.0ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "test"], ["updated_at", "2018-11-30 02:01:09.012441"], ["key", "environment"]]
+  ↳ bin/rails:9
+  [1m[35m (11.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (1.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:34
+  [1m[36mCategory Create (1.4ms)[0m  [1m[32mINSERT INTO "categories" ("title", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["title", "Snowshoe"], ["created_at", "2018-11-30 02:01:15.523183"], ["updated_at", "2018-11-30 02:01:15.523183"]]
+  ↳ db/seeds.rb:34
+  [1m[35m (11.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:34
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:34
+  [1m[36mCategory Create (0.8ms)[0m  [1m[32mINSERT INTO "categories" ("title", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["title", "Siamese"], ["created_at", "2018-11-30 02:01:15.541199"], ["updated_at", "2018-11-30 02:01:15.541199"]]
+  ↳ db/seeds.rb:34
+  [1m[35m (5.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:34
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:34
+  [1m[36mCategory Create (1.1ms)[0m  [1m[32mINSERT INTO "categories" ("title", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["title", "Chantilly-Tiffany"], ["created_at", "2018-11-30 02:01:15.552828"], ["updated_at", "2018-11-30 02:01:15.552828"]]
+  ↳ db/seeds.rb:34
+  [1m[35m (3.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:34
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:40
+  [1m[36mItem Create (1.7ms)[0m  [1m[32mINSERT INTO "items" ("title", "description", "price", "image", "category_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Angel"], ["description", "Aperiam quo magnam. Reprehenderit sequi facere. Ut explicabo qui."], ["price", 5], ["image", "https://ichef.bbci.co.uk/images/ic/720x405/p0517py6.jpg"], ["category_id", 3], ["created_at", "2018-11-30 02:01:15.644252"], ["updated_at", "2018-11-30 02:01:15.644252"]]
+  ↳ db/seeds.rb:40
+  [1m[35m (12.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:40
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:40
+  [1m[36mItem Create (0.9ms)[0m  [1m[32mINSERT INTO "items" ("title", "description", "price", "image", "category_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Jasper"], ["description", "Voluptas nihil unde. Tempora ut eligendi. Ea esse quia."], ["price", 6], ["image", "https://images.pexels.com/photos/20787/pexels-photo.jpg"], ["category_id", 3], ["created_at", "2018-11-30 02:01:15.665301"], ["updated_at", "2018-11-30 02:01:15.665301"]]
+  ↳ db/seeds.rb:40
+  [1m[35m (2.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:40
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:40
+  [1m[36mItem Create (0.9ms)[0m  [1m[32mINSERT INTO "items" ("title", "description", "price", "image", "category_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Lucky"], ["description", "Et eum tempora. Voluptatibus quia totam. Et et earum."], ["price", 9], ["image", "https://images.pexels.com/photos/730896/pexels-photo-730896.jpeg"], ["category_id", 3], ["created_at", "2018-11-30 02:01:15.675852"], ["updated_at", "2018-11-30 02:01:15.675852"]]
+  ↳ db/seeds.rb:40
+  [1m[35m (2.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:40
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:40
+  [1m[36mItem Create (0.9ms)[0m  [1m[32mINSERT INTO "items" ("title", "description", "price", "image", "category_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Lily"], ["description", "Et et rerum. Nesciunt tempore perspiciatis. Veniam voluptatem mollitia."], ["price", 9], ["image", "https://images.pexels.com/photos/923360/pexels-photo-923360.jpeg"], ["category_id", 1], ["created_at", "2018-11-30 02:01:15.685515"], ["updated_at", "2018-11-30 02:01:15.685515"]]
+  ↳ db/seeds.rb:40
+  [1m[35m (4.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:40
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:40
+  [1m[36mItem Create (0.9ms)[0m  [1m[32mINSERT INTO "items" ("title", "description", "price", "image", "category_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Coco"], ["description", "Aperiam eum inventore. Nesciunt maxime inventore. Id labore placeat."], ["price", 10], ["image", "https://images.pexels.com/photos/96938/pexels-photo-96938.jpeg"], ["category_id", 1], ["created_at", "2018-11-30 02:01:15.698027"], ["updated_at", "2018-11-30 02:01:15.698027"]]
+  ↳ db/seeds.rb:40
+  [1m[35m (3.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:40
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:40
+  [1m[36mItem Create (0.8ms)[0m  [1m[32mINSERT INTO "items" ("title", "description", "price", "image", "category_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Daisy"], ["description", "Harum ut eaque. Cum culpa voluptatem. Quaerat quos odio."], ["price", 8], ["image", "https://images.pexels.com/photos/315582/pexels-photo-315582.jpeg"], ["category_id", 2], ["created_at", "2018-11-30 02:01:15.708099"], ["updated_at", "2018-11-30 02:01:15.708099"]]
+  ↳ db/seeds.rb:40
+  [1m[35m (4.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:40
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:40
+  [1m[36mItem Create (0.9ms)[0m  [1m[32mINSERT INTO "items" ("title", "description", "price", "image", "category_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Lucky"], ["description", "Dolores sed non. Animi ratione ut. Aliquam quasi dolores."], ["price", 7], ["image", "https://images.pexels.com/photos/1084425/pexels-photo-1084425.jpeg"], ["category_id", 3], ["created_at", "2018-11-30 02:01:15.719143"], ["updated_at", "2018-11-30 02:01:15.719143"]]
+  ↳ db/seeds.rb:40
+  [1m[35m (4.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:40
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:40
+  [1m[36mItem Create (0.8ms)[0m  [1m[32mINSERT INTO "items" ("title", "description", "price", "image", "category_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Smudge"], ["description", "Optio dolores et. Repellendus quasi quo. Ratione ea fugiat."], ["price", 5], ["image", "https://images.pexels.com/photos/1056251/pexels-photo-1056251.jpeg"], ["category_id", 3], ["created_at", "2018-11-30 02:01:15.730315"], ["updated_at", "2018-11-30 02:01:15.730315"]]
+  ↳ db/seeds.rb:40
+  [1m[35m (4.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:40
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:40
+  [1m[36mItem Create (0.9ms)[0m  [1m[32mINSERT INTO "items" ("title", "description", "price", "image", "category_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Angel"], ["description", "Dolorem enim saepe. Alias expedita et. Tempora eum nulla."], ["price", 10], ["image", "https://images.pexels.com/photos/127027/pexels-photo-127027.jpeg"], ["category_id", 2], ["created_at", "2018-11-30 02:01:15.741609"], ["updated_at", "2018-11-30 02:01:15.741609"]]
+  ↳ db/seeds.rb:40
+  [1m[35m (4.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:40
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:40
+  [1m[36mItem Create (0.8ms)[0m  [1m[32mINSERT INTO "items" ("title", "description", "price", "image", "category_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Smudge"], ["description", "Ducimus impedit libero. Rerum et id. Et blanditiis qui."], ["price", 8], ["image", "https://images.pexels.com/photos/225406/pexels-photo-225406.jpeg"], ["category_id", 3], ["created_at", "2018-11-30 02:01:15.752640"], ["updated_at", "2018-11-30 02:01:15.752640"]]
+  ↳ db/seeds.rb:40
+  [1m[35m (5.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:40
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:40
+  [1m[36mItem Create (0.9ms)[0m  [1m[32mINSERT INTO "items" ("title", "description", "price", "image", "category_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Alfie"], ["description", "Placeat ut nihil. Voluptatem vitae in. Est sit asperiores."], ["price", 10], ["image", "https://images.pexels.com/photos/399647/pexels-photo-399647.jpeg"], ["category_id", 1], ["created_at", "2018-11-30 02:01:15.763751"], ["updated_at", "2018-11-30 02:01:15.763751"]]
+  ↳ db/seeds.rb:40
+  [1m[35m (4.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:40
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:40
+  [1m[36mItem Create (0.8ms)[0m  [1m[32mINSERT INTO "items" ("title", "description", "price", "image", "category_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Simba"], ["description", "Et fugit cum. Esse exercitationem laborum. Veritatis id qui."], ["price", 8], ["image", "https://images.pexels.com/photos/1022158/pexels-photo-1022158.jpeg"], ["category_id", 1], ["created_at", "2018-11-30 02:01:15.774838"], ["updated_at", "2018-11-30 02:01:15.774838"]]
+  ↳ db/seeds.rb:40
+  [1m[35m (4.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:40
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:40
+  [1m[36mItem Create (0.9ms)[0m  [1m[32mINSERT INTO "items" ("title", "description", "price", "image", "category_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Oscar"], ["description", "Impedit et sit. Suscipit est a. Consequatur tenetur voluptate."], ["price", 6], ["image", "https://images.pexels.com/photos/747795/pexels-photo-747795.jpeg"], ["category_id", 2], ["created_at", "2018-11-30 02:01:15.786035"], ["updated_at", "2018-11-30 02:01:15.786035"]]
+  ↳ db/seeds.rb:40
+  [1m[35m (4.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:40
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:40
+  [1m[36mItem Create (1.0ms)[0m  [1m[32mINSERT INTO "items" ("title", "description", "price", "image", "category_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Alfie"], ["description", "Labore reprehenderit distinctio. Qui omnis vitae. Et iste consequatur."], ["price", 10], ["image", "https://images.pexels.com/photos/1472999/pexels-photo-1472999.jpeg"], ["category_id", 2], ["created_at", "2018-11-30 02:01:15.797068"], ["updated_at", "2018-11-30 02:01:15.797068"]]
+  ↳ db/seeds.rb:40
+  [1m[35m (4.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:40
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:40
+  [1m[36mItem Create (0.8ms)[0m  [1m[32mINSERT INTO "items" ("title", "description", "price", "image", "category_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Alfie"], ["description", "Illo vel commodi. Aut voluptas placeat. Sed sint error."], ["price", 8], ["image", "https://images.pexels.com/photos/115011/cat-face-close-view-115011.jpeg"], ["category_id", 1], ["created_at", "2018-11-30 02:01:15.808255"], ["updated_at", "2018-11-30 02:01:15.808255"]]
+  ↳ db/seeds.rb:40
+  [1m[35m (4.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:40
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:40
+  [1m[36mItem Create (0.9ms)[0m  [1m[32mINSERT INTO "items" ("title", "description", "price", "image", "category_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Alfie"], ["description", "Sed sed ut. Magni officia quaerat. Tenetur aut expedita."], ["price", 9], ["image", "https://images.pexels.com/photos/460797/pexels-photo-460797.jpeg"], ["category_id", 3], ["created_at", "2018-11-30 02:01:15.820443"], ["updated_at", "2018-11-30 02:01:15.820443"]]
+  ↳ db/seeds.rb:40
+  [1m[35m (3.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:40
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:40
+  [1m[36mItem Create (0.8ms)[0m  [1m[32mINSERT INTO "items" ("title", "description", "price", "image", "category_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Sam"], ["description", "Vero nobis itaque. Doloremque eos voluptas. Dignissimos velit error."], ["price", 10], ["image", "https://images.pexels.com/photos/978555/pexels-photo-978555.jpeg"], ["category_id", 1], ["created_at", "2018-11-30 02:01:15.830236"], ["updated_at", "2018-11-30 02:01:15.830236"]]
+  ↳ db/seeds.rb:40
+  [1m[35m (5.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:40
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:40
+  [1m[36mItem Create (0.9ms)[0m  [1m[32mINSERT INTO "items" ("title", "description", "price", "image", "category_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Oscar"], ["description", "Mollitia dolorem ut. Minus praesentium qui. Minus pariatur velit."], ["price", 5], ["image", "https://images.pexels.com/photos/1359035/pexels-photo-1359035.jpeg"], ["category_id", 1], ["created_at", "2018-11-30 02:01:15.841967"], ["updated_at", "2018-11-30 02:01:15.841967"]]
+  ↳ db/seeds.rb:40
+  [1m[35m (3.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:40
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:40
+  [1m[36mItem Create (0.8ms)[0m  [1m[32mINSERT INTO "items" ("title", "description", "price", "image", "category_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Oliver"], ["description", "Officiis beatae saepe. Labore doloremque omnis. Qui et culpa."], ["price", 5], ["image", "https://images.pexels.com/photos/599492/pexels-photo-599492.jpeg"], ["category_id", 3], ["created_at", "2018-11-30 02:01:15.852786"], ["updated_at", "2018-11-30 02:01:15.852786"]]
+  ↳ db/seeds.rb:40
+  [1m[35m (4.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:40
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:40
+  [1m[36mItem Create (0.8ms)[0m  [1m[32mINSERT INTO "items" ("title", "description", "price", "image", "category_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Millie"], ["description", "Qui non cumque. Sit quia atque. Laboriosam expedita quasi."], ["price", 7], ["image", "https://images.pexels.com/photos/731553/pexels-photo-731553.jpeg"], ["category_id", 3], ["created_at", "2018-11-30 02:01:15.863907"], ["updated_at", "2018-11-30 02:01:15.863907"]]
+  ↳ db/seeds.rb:40
+  [1m[35m (4.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:40
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:40
+  [1m[36mItem Create (0.9ms)[0m  [1m[32mINSERT INTO "items" ("title", "description", "price", "image", "category_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Bella"], ["description", "Occaecati qui ab. Enim ad id. Quia inventore enim."], ["price", 5], ["image", "https://images.pexels.com/photos/958181/pexels-photo-958181.jpeg"], ["category_id", 2], ["created_at", "2018-11-30 02:01:15.874768"], ["updated_at", "2018-11-30 02:01:15.874768"]]
+  ↳ db/seeds.rb:40
+  [1m[35m (4.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:40
