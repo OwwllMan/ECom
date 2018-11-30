@@ -13,8 +13,6 @@ class CartsController < ApplicationController
 	end
 
 	def create
-		puts "JE PRINT PARAMS"
-		print params
 		Cart.create!(user_id: current_user.id, item_id: params[:item_id])
 	end
 

@@ -1,12 +1,20 @@
 <% total = 0 %>
 
-<% @cart.each do |cart| %>
- <%= Item.find(Cart.find(cart.id).item_id).title %>
- <br>
- <%= Item.find(Cart.find(cart.id).item_id).price %>
- <% total += Item.find(Cart.find(cart.id).item_id).price %>
- <br>
- <br>
-<% end %>
+<div align="center">
+  <% @cart.each do |cart| %>
+    <div class="card bg-light mb-3" style="max-width: 18rem;" align="center">
+      <div class="card-header"> <%= Item.find(Cart.find(cart.id).item_id).title %></div>
+      <div class="card-body">
+        <h5 class="card-title"><%= "Price : $#{Item.find(Cart.find(cart.id).item_id).price}"%></h5>
+      </div>
+    </div>
+    <br>
+    <% total += Item.find(Cart.find(cart.id).item_id).price %>
+  <% end %>
 
-<%= total %>
+  <div class="card" style="max-width: 18rem;" align="center">
+    <div class="card-body">
+      <h2>Total price : $<%= total %></h2>
+    </div>
+  </div>
+</div>
